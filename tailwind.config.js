@@ -22,5 +22,5 @@ module.exports = {
 	daisyui: {
 		themes: ["night", "cupcake"],
 	},
-	plugins: [require("@tailwindcss/forms"), require("daisyui")],
+	plugins: [require("@tailwindcss/forms"), require("daisyui"), require("tailwind-scrollbar")({ nocompatible: true })],
 };
