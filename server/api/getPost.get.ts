@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event: any) => {
-  const { current } = event.context.params;
+  const { cursor } = event.context.params;
 
-  return await prisma.pens.findMany({
+  const posts = await prisma.pens.findMany({
     select: {
       id: true,
       content: true,
@@ -15,8 +15,14 @@ export default defineEventHandler(async (event: any) => {
     orderBy: {
       createdAt: 'desc',
     },
-    skip: current || 0,
+    cursor: cursor ? { id: cursor } : undefined,
+    // skip: 1,
     take: 20,
-  })
+  });
 
+  if (posts.length === 0) {
+    return null;
+  }
+
+  return posts;
 });
