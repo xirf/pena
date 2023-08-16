@@ -4,11 +4,14 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
+  nitro: {
+    preset: 'vercel-edge',
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
-  modules: ['nuxt-icon'],
+  modules: [ 'nuxt-icon' ],
 })
